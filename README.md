@@ -1,4 +1,5 @@
-**Parallel Algorithms and Programming Repository**
+**#Parallel Algorithms and Programming Repository**  
+
 This repository explores advanced concepts in parallel computing and programming. It includes implementations and examples of:
 
 1. Thread-based parallelism with static and dynamic load balancing.
