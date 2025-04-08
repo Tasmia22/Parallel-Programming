@@ -1,0 +1,58 @@
+Objective: The learning objective of this assignment is to practice writing parallel programs for a programmer friendly MapReduce paradigm. By doing these three assignments, students will gain experience in writing map and reduce functions to solve compute- and data-intensive problems.
+
+ 
+
+Each question carries 10 points each.
+
+Q1. Write MapReduce algorithm for the Join two tables problem (slide 30 from the slides). Assume the two tables are huge 50 GB each. Will your algorithm scale when you use clusters with 2 compute nodes and 4 compute nodes. Describe how a MapReduce implementation will execute your algorithm
+
+Q2. Write a MapReduce algorithm to print the frequency distribution of state-wise vote counts by Democratic Party. Assume that the Party Name can be Republican or Democratic. (details on slide 32).
+
+Q3. Express the naive algorithm for finding all the intersections among N line segments as a MapReduce algorithm.  To check if any two line segments are intersecting or not, use a pre-defined function isIntersecting( line l, line h ) which returns true if l and h are intersecting. 
+For instance, we know that the two line segments are indeed intersecting in the picture below. If the two line segments did not intersect, isIntersecting( .., .. ) will return false. Assume that N is known value in your algorithm.
+
+Actual code is not required here only map function and reduce function. No explicit I/O is needed because MapReduce does I/O. Assume that the input is stored in a 10 GB file - lines.txt.  Show the key value pairs and how they get transformed in the map and reduce phases. Full points will be given based on the correctness as well as efficiency of your algorithm.
+
+Description of lines.txt: Each record in the file has four co-ordinates: “line_number x1 y1 x2 y2”
+
+1 23 45 21 44 
+
+2 33 55 31 88 
+
+3 ….     ….     …. 
+
+.. .. .. .. .. .. .. .. ..  
+
+ 
+
+   Sequential Algorithm  is provided here to show the sequential steps involved in finding and reporting line segment intersections.     
+
+   Input: An array of lines - line[N] 
+
+ 
+
+   // readLine function reads the x,y coordinates  to a line. 
+
+   for (int i = 0; i<N; i++) 
+
+       line[i] = file.readLine( x1, y1, x2, y2); 
+
+ 
+
+   Allocate a list to store intersections. 
+
+   for(int i = 0; i< N; i++) 
+
+         for(int j = 0; i< N; j++) 
+
+               if(isIntersecting(line[i], line[j]) 
+
+                     list.add( getIntersection(line[i], line[j]) ); 
+
+                 
+
+isIntersecting(line1, line2) returns true if line1 and line2 intersect. False otherwise.
+
+Function getIntersection returns the point of intersection which is being stored in the list for the purpose of producing output.
+
+As you can see, the algorithm for reporting all line segment intersections is a naive/brute-force algorithm because it compares a line segment to every other line segment. Therefore, it is a quadratic time algorithm with respect to the number of input line segments. This is the algorithm that you have to parallelize using MapReduce paradigm. In MapReduce algorithm, you don't have to show file reading. The input is assumed to be available via key/value pairs. 
